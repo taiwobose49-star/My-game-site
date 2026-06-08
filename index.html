@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QPay Login</title>
+<title>QPay App</title>
 
 <style>
 *{
@@ -15,87 +15,49 @@
 
 body{
     height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
     background:linear-gradient(135deg,#00c853,#00e676,#00b248);
-}
-
-/* LOGIN BOX */
-.login-box{
-    width:90%;
-    max-width:380px;
-    background:#fff;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.2);
-}
-
-/* LOGO */
-.logo{
-    width:150px;
-    height:80px;
-    margin:0 auto 20px;
-    border-radius:18px;
-    background:linear-gradient(135deg,#ffffff,#d9f0ff);
     display:flex;
-    align-items:center;
     justify-content:center;
-    font-size:34px;
-    font-weight:bold;
+    align-items:center;
+}
+
+/* APP CONTAINER */
+.app{
+    width:100%;
+    max-width:420px;
+    height:100vh;
+    background:#fff;
     position:relative;
     overflow:hidden;
 }
 
-/* LEFT BLUE STRIPE */
-.logo::before{
-    content:"";
-    position:absolute;
-    left:0;
-    top:0;
-    width:8px;
-    height:100%;
-    background:#00a8ff;
-    border-top-left-radius:18px;
-    border-bottom-left-radius:18px;
+/* PAGES */
+.page{
+    display:none;
+    padding:25px;
+    height:calc(100vh - 70px);
+    overflow-y:auto;
 }
 
-.q{
-    color:#00a8ff;
-    margin-right:2px;
+.page.active{
+    display:block;
 }
 
-.pay{
-    color:#111;
+/* TOP CARD */
+.card{
+    background:linear-gradient(135deg,#00c853,#00e676);
+    padding:20px;
+    border-radius:15px;
+    color:white;
+    margin-top:15px;
 }
 
-h1{
-    color:#00a63e;
-    text-align:center;
-    margin-bottom:10px;
-    font-size:26px;
+.balance{
+    font-size:28px;
+    font-weight:bold;
 }
 
-.subtitle{
-    text-align:center;
-    color:#666;
-    margin-bottom:25px;
-}
-
-input{
-    width:100%;
-    padding:14px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    font-size:16px;
-    margin-bottom:15px;
-    outline:none;
-}
-
-input:focus{
-    border-color:#00c853;
-}
-
+/* BUTTONS */
 button{
     width:100%;
     padding:14px;
@@ -103,89 +65,184 @@ button{
     border-radius:10px;
     background:#00c853;
     color:white;
-    font-size:16px;
     font-weight:bold;
+    margin-top:15px;
     cursor:pointer;
 }
 
-button:hover{
-    opacity:0.9;
-}
-
-.footer{
+/* INPUT */
+input{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:10px;
+    border:1px solid #ddd;
     text-align:center;
-    margin-top:15px;
-    color:#777;
-    font-size:14px;
 }
 
-/* DASHBOARD */
-.dashboard{
+/* NAV BAR */
+.nav{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:70px;
+    background:#111;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+}
+
+.nav div{
+    color:#aaa;
+    font-size:12px;
+    text-align:center;
+    cursor:pointer;
+}
+
+.nav div.active{
+    color:#00e676;
+}
+
+/* ICON STYLE */
+.icon{
+    font-size:18px;
+    display:block;
+    margin-bottom:3px;
+}
+
+/* SECTIONS */
+.section{
     display:none;
-    width:90%;
-    max-width:380px;
-    background:#fff;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.2);
-    text-align:center;
 }
 
-.card{
-    background:linear-gradient(135deg,#00c853,#00e676);
-    padding:20px;
-    border-radius:15px;
-    color:white;
+.section.active{
+    display:block;
+}
+
+/* PROFILE */
+.profile-box{
+    text-align:center;
     margin-top:20px;
 }
 
-.balance{
-    font-size:28px;
-    font-weight:bold;
-    margin-top:10px;
+.avatar{
+    width:80px;
+    height:80px;
+    background:#00c853;
+    border-radius:50%;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    color:#fff;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<div class="login-box" id="loginBox">
+<div class="app">
 
-    <div class="logo">
-        <span class="q">Q</span><span class="pay">Pay</span>
-    </div>
-
-    <h1>Login Into Your Account</h1>
-    <p class="subtitle">Welcome back</p>
-
-    <input type="text" placeholder="Enter your mobile number / Email" id="userInput">
-
-    <button onclick="login()">Login</button>
-
-    <div class="footer">
-        Secure Login Portal
-    </div>
-
-</div>
-
-<!-- DASHBOARD -->
-<div class="dashboard" id="dashboard">
-
-    <h2>Welcome, Iremide 👋</h2>
+<!-- HOME -->
+<div class="page active" id="home">
+    <h2>Home</h2>
 
     <div class="card">
-        <p>Your Balance</p>
+        <p>Welcome, Iremide 👋</p>
         <div class="balance">₦10,000</div>
     </div>
+
+    <button onclick="goSend()">Send Money</button>
+</div>
+
+<!-- SEND -->
+<div class="page" id="send">
+    <h2>Send Money</h2>
+
+    <input type="text" placeholder="Recipient Number">
+    <input type="number" placeholder="Amount (₦)">
+
+    <button onclick="sendMoney()">Send</button>
+</div>
+
+<!-- WALLET -->
+<div class="page" id="wallet">
+    <h2>Wallet</h2>
+
+    <div class="card">
+        <p>Main Balance</p>
+        <div class="balance">₦10,000</div>
+    </div>
+
+    <div class="card">
+        <p>Bonus Balance</p>
+        <div class="balance">₦500</div>
+    </div>
+</div>
+
+<!-- PROFILE -->
+<div class="page" id="profile">
+    <h2>Profile</h2>
+
+    <div class="profile-box">
+        <div class="avatar">I</div>
+        <h3>Iremide</h3>
+        <p>Verified User</p>
+    </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="nav">
+    <div class="active" onclick="showPage('home',this)">
+        <span class="icon">🏠</span>
+        Home
+    </div>
+
+    <div onclick="showPage('send',this)">
+        <span class="icon">💸</span>
+        Send
+    </div>
+
+    <div onclick="showPage('wallet',this)">
+        <span class="icon">👛</span>
+        Wallet
+    </div>
+
+    <div onclick="showPage('profile',this)">
+        <span class="icon">👤</span>
+        Profile
+    </div>
+</div>
 
 </div>
 
 <script>
-function login(){
-    document.getElementById("loginBox").style.display = "none";
-    document.getElementById("dashboard").style.display = "block";
+
+function showPage(page,el){
+
+    // hide pages
+    let pages=document.querySelectorAll(".page");
+    pages.forEach(p=>p.classList.remove("active"));
+
+    document.getElementById(page).classList.add("active");
+
+    // nav active state
+    let navs=document.querySelectorAll(".nav div");
+    navs.forEach(n=>n.classList.remove("active"));
+
+    el.classList.add("active");
 }
+
+function goSend(){
+    showPage("send",document.querySelectorAll(".nav div")[1]);
+}
+
+function sendMoney(){
+    alert("Money sent successfully ✔️");
+    showPage("home",document.querySelectorAll(".nav div")[0]);
+}
+
 </script>
 
 </body>
