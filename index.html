@@ -21,7 +21,6 @@ body{
     background:linear-gradient(135deg,#00c853,#00e676,#00b248);
 }
 
-/* APP */
 .app{
     width:100%;
     max-width:420px;
@@ -36,14 +35,13 @@ body{
     display:none;
     padding:25px;
     height:calc(100vh - 70px);
-    overflow-y:auto;
 }
 
 .screen.active{
     display:block;
 }
 
-/* LOGIN */
+/* LOGO */
 .logo{
     width:150px;
     height:80px;
@@ -80,6 +78,23 @@ input{
     border-radius:10px;
     border:1px solid #ddd;
     text-align:center;
+    transition:0.2s;
+}
+
+/* ERROR STYLE */
+input.error{
+    border:2px solid red;
+    animation:shake 0.4s;
+}
+
+/* SHAKE ANIMATION */
+@keyframes shake{
+    0%{transform:translateX(0);}
+    20%{transform:translateX(-8px);}
+    40%{transform:translateX(8px);}
+    60%{transform:translateX(-8px);}
+    80%{transform:translateX(8px);}
+    100%{transform:translateX(0);}
 }
 
 button{
@@ -125,20 +140,6 @@ button{
     100%{transform:rotate(360deg);}
 }
 
-/* SUCCESS */
-.check{
-    width:80px;
-    height:80px;
-    background:#00c853;
-    border-radius:50%;
-    margin:20px auto;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#fff;
-    font-size:40px;
-}
-
 /* DASHBOARD */
 .card{
     background:linear-gradient(135deg,#00c853,#00e676);
@@ -153,7 +154,6 @@ button{
     font-weight:bold;
 }
 
-/* NAV */
 .nav{
     position:absolute;
     bottom:0;
@@ -169,7 +169,6 @@ button{
     color:#aaa;
     font-size:12px;
     text-align:center;
-    cursor:pointer;
 }
 
 .nav div.active{
@@ -202,7 +201,7 @@ button{
 <!-- PIN -->
 <div class="screen" id="pin">
     <h2>Enter PIN</h2>
-    <input id="pinInput" type="password" maxlength="4" placeholder="4-digit PIN">
+    <input id="pinInput" type="password" maxlength="4">
     <button onclick="checkPin()">Continue</button>
 </div>
 
@@ -227,16 +226,14 @@ button{
         <p>Balance</p>
         <div class="balance">₦10,000</div>
     </div>
-
-    <button onclick="sendMoney()">Send Money</button>
 </div>
 
 <!-- NAV -->
 <div class="nav">
-    <div class="active" onclick="go('home')"><span class="icon">🏠</span>Home</div>
-    <div onclick="go('home')"><span class="icon">💸</span>Send</div>
-    <div onclick="go('home')"><span class="icon">👛</span>Wallet</div>
-    <div onclick="go('home')"><span class="icon">👤</span>Profile</div>
+    <div class="active">🏠<br>Home</div>
+    <div>💸<br>Send</div>
+    <div>👛<br>Wallet</div>
+    <div>👤<br>Profile</div>
 </div>
 
 </div>
@@ -248,17 +245,23 @@ function show(id){
     document.getElementById(id).classList.add("active");
 }
 
-/* LOGIN */
+/* LOGIN WITH SHAKE ERROR */
 function login(){
-    let p=document.getElementById("pass").value;
-    if(p==="0000"){
+    let input=document.getElementById("pass");
+
+    if(input.value==="0000"){
         show("pin");
     }else{
-        alert("Wrong password (0000)");
+        input.classList.add("error");
+
+        setTimeout(()=>{
+            input.classList.remove("error");
+        },500);
+
+        input.value="";
     }
 }
 
-/* PIN */
 function checkPin(){
     if(document.getElementById("pinInput").value==="1234"){
         show("finger");
@@ -267,20 +270,9 @@ function checkPin(){
     }
 }
 
-/* FINGER */
 function loading(){
     show("load");
     setTimeout(()=>show("home"),2000);
-}
-
-/* SEND */
-function sendMoney(){
-    alert("Money sent successfully ✔️");
-}
-
-/* NAV */
-function go(id){
-    show(id);
 }
 
 </script>
