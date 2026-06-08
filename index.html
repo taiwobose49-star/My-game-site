@@ -46,7 +46,7 @@ body.dark{
     display:block;
 }
 
-/* LOGO */
+/* LOGIN */
 .logo{
     width:150px;
     height:80px;
@@ -64,7 +64,7 @@ body.dark{
 .q{color:#00c853;}
 .pay{color:#111;}
 
-h2{text-align:center;color:#00a63e;}
+h2{text-align:center;color:#00c853;}
 
 input{
     width:100%;
@@ -102,7 +102,7 @@ button{
     100%{transform:rotate(360deg);}
 }
 
-/* DASHBOARD */
+/* HOME CARD */
 .card{
     background:linear-gradient(135deg,#00c853,#00e676);
     padding:20px;
@@ -116,6 +116,29 @@ button{
     font-weight:bold;
 }
 
+/* QUICK ACTIONS */
+.quick-actions{
+    display:flex;
+    justify-content:space-between;
+    margin-top:15px;
+}
+
+.action{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    font-size:11px;
+    color:#fff;
+    gap:5px;
+}
+
+.square{
+    width:45px;
+    height:45px;
+    background:#000;
+    border-radius:8px;
+}
+
 /* SETTINGS ICON */
 .settings{
     position:absolute;
@@ -125,7 +148,7 @@ button{
     cursor:pointer;
 }
 
-/* SETTINGS ITEMS */
+/* SETTINGS */
 .setting-item{
     padding:15px;
     background:#f3f3f3;
@@ -143,27 +166,20 @@ body.dark .setting-item{
     bottom:0;
     width:100%;
     height:70px;
-    background:#fff;
-    border-top:1px solid #ddd;
+    background:#111;
     display:flex;
     justify-content:space-around;
     align-items:center;
 }
 
-body.dark .nav{
-    background:#111;
-    border-top:1px solid #222;
-}
-
-.nav-item{
+.nav div{
+    color:#aaa;
     font-size:11px;
     text-align:center;
-    color:#777;
-    cursor:pointer;
 }
 
-.nav-item.active{
-    color:#00c853;
+.nav div.active{
+    color:#00e676;
     font-weight:bold;
 }
 
@@ -172,7 +188,7 @@ body.dark .nav{
     display:block;
 }
 
-/* PAGES */
+/* PAGE */
 .page{
     padding:20px;
 }
@@ -187,6 +203,7 @@ body.dark .nav{
 <!-- LOGIN -->
 <div class="screen active" id="login">
     <div class="logo"><span class="q">Q</span><span class="pay">Pay</span></div>
+
     <h2>Login</h2>
 
     <input id="pass" type="password" placeholder="Password">
@@ -208,6 +225,7 @@ body.dark .nav{
 
 <!-- HOME -->
 <div class="screen" id="home">
+
     <div class="settings" onclick="show('settings')">⚙️</div>
 
     <h2>Welcome 👋</h2>
@@ -215,31 +233,50 @@ body.dark .nav{
     <div class="card">
         <p>Available Balance</p>
         <div class="balance">₦10,000</div>
+
+        <!-- QUICK ACTIONS -->
+        <div class="quick-actions">
+            <div class="action">
+                <div class="square"></div>
+                <span>Opay</span>
+            </div>
+
+            <div class="action">
+                <div class="square"></div>
+                <span>To Bank</span>
+            </div>
+
+            <div class="action">
+                <div class="square"></div>
+                <span>Withdraw</span>
+            </div>
+        </div>
     </div>
+
 </div>
 
 <!-- REWARD -->
 <div class="screen" id="reward">
     <h2>🎁 Reward</h2>
-    <div class="page">
-        <p>No rewards available yet.</p>
-    </div>
+    <div class="page">No rewards yet.</div>
 </div>
 
 <!-- FINANCE -->
 <div class="screen" id="finance">
     <h2>💰 Finance</h2>
-    <div class="page">
-        <p>Finance dashboard coming soon.</p>
-    </div>
+    <div class="page">Finance dashboard coming soon.</div>
 </div>
 
 <!-- CARDS -->
 <div class="screen" id="cards">
     <h2>💳 Cards</h2>
-    <div class="page">
-        <p>No cards created yet.</p>
-    </div>
+    <div class="page">No cards yet.</div>
+</div>
+
+<!-- ME -->
+<div class="screen" id="me">
+    <h2>👤 Profile</h2>
+    <div class="page">User: Iremide</div>
 </div>
 
 <!-- SETTINGS -->
@@ -258,15 +295,6 @@ body.dark .nav{
     </div>
 
     <button onclick="show('home')">Back</button>
-</div>
-
-<!-- ME (PROFILE) -->
-<div class="screen" id="me">
-    <h2>👤 Profile</h2>
-    <div class="page">
-        <p>User: Iremide</p>
-        <p>Status: Active</p>
-    </div>
 </div>
 
 <!-- BOTTOM NAV -->
@@ -337,4 +365,4 @@ function toggleTheme(){
 </script>
 
 </body>
-    </html>
+                                                        </html>
